@@ -1,0 +1,115 @@
+﻿@model Libreria.Models.Prestamo
+
+@{
+    ViewBag.Title = "buscarPrestamo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Prestamo</h2>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class=" col-12 col-md-5">
+
+            <div>
+
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.idPrestamo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.idPrestamo)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.nomLibro)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.nomLibro)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.nomEstudiante)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.nomEstudiante)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.fechaPrestamo)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.fechaPrestamo)
+                    </dd>
+
+                    <dt>
+                        @if (Model.fechaDevolucion != DateTime.MinValue)
+                        {
+                        <dd>
+                            @Html.DisplayFor(model => model.fechaDevolucion)
+                        </dd>
+
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("modificarPrestamo", "Prestamos", FormMethod.Post))
+                        {
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    @Html.HiddenFor(model => model.idPrestamo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    @Html.LabelFor(model => model.fechaDevolucion, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.fechaDevolucion, new { htmlAttributes = new { @class = "datepicker", @type = "date", @min = Model.fechaPrestamo } })
+                                        @Html.ValidationMessageFor(model => model.fechaDevolucion, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Generar devolucion" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    }
+
+                        </dt>
+
+
+                        <dt>
+                            @using (Html.BeginForm("registrarEstudiante", "Prestamos", FormMethod.Post))
+                            {
+
+                            }
+                            @Html.DisplayNameFor(model => model.diasPrestado)
+                        </dt>
+
+                        <dd>
+                            @if (Model.fechaDevolucion != DateTime.MinValue)
+                            {
+                                TimeSpan diasDif = Model.fechaDevolucion.Subtract(Model.fechaPrestamo);
+                                int dias = (int)diasDif.TotalDays;
+                                <p>
+                                    @dias
+                                </p>
+                            }
+                            else
+                            {
+                                <p>--</p>
+                            }
+                        </dd>
+
+                    </dl>
+                </div>
+                <div>
+                    @Html.ActionLink("Volver", "InicioPrestamo", null, new { @class="btn btn-primary"})
+                </div>
+            </div>
+    </div>
+</div>

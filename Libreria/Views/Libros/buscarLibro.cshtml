@@ -1,0 +1,63 @@
+﻿@model Libreria.Models.Libro
+
+@{
+    ViewBag.Title = "buscarLibro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Libro</h2>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class=" col-12 col-md-5">
+            <div>
+
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.idLibros)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.idLibros)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.nombre)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.existencias)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.existencias)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.disponibilidad)
+                    </dt>
+
+                    <dd>
+                        @if (Model.disponibilidad == 1)
+                        {
+                            <p>Disponible para prestamo</p>
+                        }
+                        else
+                        {
+                            <p>No es posible prestar</p>
+                        }
+                    </dd>
+                </dl>
+            </div>
+            <hr />
+            <div>
+                @Html.ActionLink("Volver", "InicioLibro", null, new { @class = "btn btn-primary" })
+            </div>
+
+        </div>
+    </div>
+</div>
+            

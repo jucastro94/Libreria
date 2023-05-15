@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Libreria.Models.Estudiante>
+
+@{
+    ViewBag.Title = "Inicio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Estudiantes</h2>
+
+<div class="">
+    @Html.ActionLink("crear nuevo", "registro", null, new { @class = "btn btn-primary m-3" })
+</div>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idEstudiante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.apellidos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+     <tbody> 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.idEstudiante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+
+                @Html.ActionLink("Ver Detalle", "buscarestudiante", new { id = item.idEstudiante }, new { @class = "btn btn-success text-white" })
+            </td>
+        </tr>
+    }
+</tbody>
+</table>
+

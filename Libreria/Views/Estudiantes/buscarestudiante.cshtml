@@ -1,0 +1,47 @@
+﻿@model Libreria.Models.Estudiante
+
+@{
+    ViewBag.Title = "buscarestudiante";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center m-3">Estudiante</h2>
+<hr />
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class=" col-12 col-md-5">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.idEstudiante)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.idEstudiante)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nombre)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.apellidos)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.apellidos)
+                </dd>
+
+            </dl>
+
+            <p>
+                @Html.ActionLink("Eliminar", "eliminar", new { id = Model.idEstudiante, nom = Model.nombre, apell = Model.apellidos }, new { @class = "btn btn-danger" }) 
+                @Html.ActionLink("Volver", "Inicio", null, new { @class="btn btn-primary"})
+            </p>
+        </div>
+    </div>
+</div>
+                

@@ -1,0 +1,63 @@
+﻿@model Libreria.Models.Prestamo
+
+@{
+    ViewBag.Title = "registroPrestamo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Prestar Libro</h2>
+
+<div>
+    @Html.ActionLink("Volver", "InicioPrestamo", null, new { @class = "btn btn-primary" })
+</div>
+
+<hr />
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class=" col-12 col-md-5">
+            @using (Html.BeginForm("registrarPrestamo", "Prestamos", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.idLibro, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+                            @Html.DropDownListFor(model => model.idLibro, new SelectList(Model.listLibros, "idLibros", "nombre"), "Seleccionar libro", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.idLibro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.idEstudiante, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+
+                            @Html.DropDownListFor(model => model.idEstudiante, new SelectList(Model.listEstudiantes, "idEstudiante", "nombre"), "Seleccionar estudiante", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.idEstudiante, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.LabelFor(model => model.fechaPrestamo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fechaPrestamo, new { htmlAttributes = new { @class = "datepicker", @type = "date" } })
+                            @Html.ValidationMessageFor(model => model.fechaPrestamo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Registrar" class="btn btn-success" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

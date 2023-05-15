@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Libreria.Models.Libro>
+
+@{
+    ViewBag.Title = "InicioLibro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center ">Libros</h2>
+
+<div>
+    @Html.ActionLink("crear nuevo", "registroLibro", null, new { @class = "btn btn-primary m-3" })
+</div>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.idLibros)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.existencias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.disponibilidad)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.idLibros)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.existencias)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @if (item.disponibilidad == 1)
+                    {
+                        <p>Disponible para prestamo</p>
+
+                    }
+                    else
+                    {
+                        <p>No es posible prestar</p>
+
+                    }
+                </td>
+                <td>
+
+                    @Html.ActionLink("Detalles", "buscarLibro", new { id = item.idLibros }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

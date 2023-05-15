@@ -1,0 +1,30 @@
+﻿@model Libreria.Models.Estudiante
+
+@{
+    ViewBag.Title = "eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Eliminar estudiante</h2>
+<div class="container m-3">
+    <div class="row justify-content-center">
+        <div col-12>
+            <div class="panel-body">
+                <div class="alert alert-danger">
+                    <p class="m-2">¿Desea eliminar al estudiante @Html.DisplayTextFor(model => model.nombre) @Html.DisplayTextFor(model => model.apellidos) con id: @Html.DisplayTextFor(model => model.idEstudiante)?</p>
+
+                    @using (Html.BeginForm("eliminarEstudiante", "Estudiantes", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" class="from-control" name="id" value="@Html.DisplayTextFor(model => model.idEstudiante)" />
+                        
+                        <input type="submit" value="Confirmar eliminacion" class="btn btn-danger" />
+                        <a class="btn btn-info" href="@Url.Action("Cancelar", "Inicio")">Volver</a>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

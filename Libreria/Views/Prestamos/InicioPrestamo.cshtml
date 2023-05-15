@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Libreria.Models.Prestamo>
+
+@{
+    ViewBag.Title = "InicioPrestamo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Prestamos</h2>
+
+<div>
+    @Html.ActionLink("Crear nuevo", "registroPrestamo", new { lista = Model }, new { @class="btn btn-primary m-3"})
+</div>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idPrestamo)
+        </th>
+        <th>
+            Nombre del libro
+        </th>
+        <th>
+           Nombre del estudiante
+        </th>
+        <th>
+           Fecha de prestamo
+        </th>
+        <th>
+            Fecha de devolucion
+        </th>
+       
+        <th>
+            Dias prestado
+        </th>
+        <th></th>
+    </tr>
+</thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.idPrestamo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomLibro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomEstudiante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fechaPrestamo)
+                </td>
+                <td>
+                    @if (item.fechaDevolucion == DateTime.MinValue)
+                    {
+                        <p>no se ha entregado</p>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.fechaDevolucion)
+                    }
+
+                </td>
+                <td>
+                    @if (item.fechaDevolucion != DateTime.MinValue)
+                    {
+                        TimeSpan diasDif = item.fechaDevolucion.Subtract(item.fechaPrestamo);
+                        int dias = (int)diasDif.TotalDays;
+                        <p>
+                            @dias
+                        </p>
+                    }
+                    else
+                    {
+                        <p>--</p>
+                    }
+                </td>
+                <td>
+
+                    @Html.ActionLink("Detalles", "buscarPrestamo", new { id = item.idPrestamo }, new { @class= "btn btn-success" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
